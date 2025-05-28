@@ -12,5 +12,8 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  optimizeDeps: {
+    exclude: ['@esbuild/linux-x64']
   }
 })
