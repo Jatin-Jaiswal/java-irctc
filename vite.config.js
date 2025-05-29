@@ -6,7 +6,19 @@ import { componentTagger } from "lovable-tagger";
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      jsxRuntime: 'automatic',
+      babel: {
+        presets: [
+          ['@babel/preset-env', { 
+            targets: { browsers: ['> 1%', 'last 2 versions'] },
+            modules: false
+          }],
+          ['@babel/preset-react', { runtime: 'automatic' }],
+          '@babel/preset-typescript'
+        ]
+      }
+    }),
     componentTagger(),
   ],
   server: {
@@ -18,9 +30,10 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  esbuild: false,
   build: {
-    target: 'esnext',
-    minify: false,
+    target: 'es2015',
+    minify: 'terser',
     rollupOptions: {
       output: {
         format: 'es'
@@ -29,5 +42,10 @@ export default defineConfig({
   },
   define: {
     global: 'globalThis',
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2015'
+    }
   }
 })
