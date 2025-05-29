@@ -35,11 +35,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
   optimizeDeps: {
-    include: ['react', 'react-dom'],
-    exclude: [],
-    force: true,
-    esbuildOptions: {
-      target: 'es2015'
-    }
+    disabled: true
   }
 }))
