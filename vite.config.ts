@@ -13,10 +13,17 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  esbuild: false,
   build: {
     target: 'es2015',
+    minify: 'terser',
     rollupOptions: {
       external: [],
     },
   },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2015'
+    }
+  }
 })
