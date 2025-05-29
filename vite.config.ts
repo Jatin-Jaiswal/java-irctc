@@ -4,7 +4,17 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        presets: [
+          ['@babel/preset-env', { targets: { node: 'current' } }],
+          ['@babel/preset-react', { runtime: 'automatic' }],
+          '@babel/preset-typescript'
+        ]
+      }
+    })
+  ],
   server: {
     port: 8080
   },
@@ -22,6 +32,8 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    disabled: true
+    include: ['react', 'react-dom'],
+    exclude: [],
+    force: true
   }
 })
