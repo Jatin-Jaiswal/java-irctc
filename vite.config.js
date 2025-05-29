@@ -12,7 +12,8 @@ export default defineConfig(({ mode }) => ({
           ['@babel/preset-env', { targets: { node: 'current' } }],
           ['@babel/preset-react', { runtime: 'automatic' }],
           '@babel/preset-typescript'
-        ]
+        ],
+        plugins: []
       }
     }),
     mode === 'development' && componentTagger(),
@@ -34,16 +35,26 @@ export default defineConfig(({ mode }) => ({
       external: [],
       output: {
         manualChunks: undefined,
+        format: 'es'
       },
     },
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+    cssCodeSplit: false,
+    sourcemap: false,
+    chunkSizeWarningLimit: 1000
   },
   optimizeDeps: {
     disabled: true,
+    force: true,
+    include: [],
+    exclude: ['@esbuild/linux-x64']
   },
   define: {
     global: 'globalThis',
+  },
+  css: {
+    transformer: 'postcss'
   }
 }))
