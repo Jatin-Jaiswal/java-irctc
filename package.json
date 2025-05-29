@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:dev": "vite build --mode development",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "chmod +x node_modules/vite/node_modules/@esbuild/linux-x64/bin/esbuild || true"
   },
   "dependencies": {
     "@babel/preset-env": "^7.27.2",
