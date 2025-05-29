@@ -29,12 +29,21 @@ export default defineConfig(({ mode }) => ({
   esbuild: false,
   build: {
     target: 'es2015',
-    minify: 'terser',
+    minify: false,
     rollupOptions: {
       external: [],
+      output: {
+        manualChunks: undefined,
+      },
+    },
+    commonjsOptions: {
+      transformMixedEsModules: true,
     },
   },
   optimizeDeps: {
-    disabled: true
+    disabled: true,
+  },
+  define: {
+    global: 'globalThis',
   }
 }))
