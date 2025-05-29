@@ -23,7 +23,7 @@ export default defineConfig({
   esbuild: false,
   build: {
     target: 'es2015',
-    minify: 'terser',
+    minify: false,
     rollupOptions: {
       output: {
         format: 'es'
