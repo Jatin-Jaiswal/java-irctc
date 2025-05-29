@@ -22,8 +22,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    esbuildOptions: {
-      target: 'es2015'
-    }
+    disabled: true
   }
 })
