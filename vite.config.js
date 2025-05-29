@@ -4,20 +4,11 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import { componentTagger } from "lovable-tagger";
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   plugins: [
-    react({
-      babel: {
-        presets: [
-          ['@babel/preset-env', { targets: { node: 'current' } }],
-          ['@babel/preset-react', { runtime: 'automatic' }],
-          '@babel/preset-typescript'
-        ],
-        plugins: []
-      }
-    }),
-    mode === 'development' && componentTagger(),
-  ].filter(Boolean),
+    react(),
+    componentTagger(),
+  ],
   server: {
     host: "::",
     port: 8080,
@@ -27,34 +18,16 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  esbuild: false,
   build: {
-    target: 'es2015',
+    target: 'esnext',
     minify: false,
     rollupOptions: {
-      external: [],
       output: {
-        manualChunks: undefined,
         format: 'es'
       },
     },
-    commonjsOptions: {
-      transformMixedEsModules: true,
-    },
-    cssCodeSplit: false,
-    sourcemap: false,
-    chunkSizeWarningLimit: 1000
-  },
-  optimizeDeps: {
-    disabled: true,
-    force: true,
-    include: [],
-    exclude: ['@esbuild/linux-x64']
   },
   define: {
     global: 'globalThis',
-  },
-  css: {
-    transformer: 'postcss'
   }
-}))
+})
