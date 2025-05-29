@@ -13,14 +13,10 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  esbuild: false,
   build: {
-    target: 'esnext',
-    minify: 'terser'
+    target: 'es2015',
+    rollupOptions: {
+      external: [],
+    },
   },
-  optimizeDeps: {
-    esbuildOptions: {
-      target: 'esnext'
-    }
-  }
 })
